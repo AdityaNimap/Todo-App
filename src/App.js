@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
 
-function App() {
+const App = () => {
+  const [allTask,setAllTask]= useState([]);
+  const [task,setTask]=useState("");
+  const API = "http://localhost:8080/Todo"
+  const fetchData = async (url)=>{
+    const resp = await fetch(url)
+    const data = await resp.json();
+    // console.log(data)
+    setAllTask(data)
+  }
+  useEffect(()=>{
+    fetchData(API);
+  },[])
+  const submitTask = ()=>{
+  
+    fetch(API,{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+        
+      },
+      body: JSON.stringify("resp",task)
+    })
+      .then((resp)=>console.log(resp))
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input type='text' name='task' value={task} onChange={(e)=> setTask(e.target.value)}></input>
+      <button onClick={submitTask}>Add Task</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Task</th>
+          </tr>
+        </thead>
+        <tbody>
+      {
+        allTask.map((currTask)=>{
+          return <tr key={currTask.id}>
+            <td>{currTask.id}</td>
+            <td>{currTask.task}</td>
+          </tr>
+        })
+      }
+      </tbody>
+      </table>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
