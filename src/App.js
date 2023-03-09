@@ -1,9 +1,16 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import FetchApi from './Component/FetchApi'
+import AxiosApi from './Component/AxiosApi'
+import Home from './Component/Home'
 const App = () => {
   return (
     <div>
-      <FetchApi/>
+      <Routes>
+        <Route path='/fetchapi' element={<FetchApi/>}/>
+        <Route path='axiosapi' element={<AxiosApi/>}/>
+        <Route path='/' element={<Home/>}/>
+      </Routes>
     </div>
   )
 }

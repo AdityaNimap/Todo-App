@@ -6,23 +6,16 @@
       "id": 1
     },
     {
-      "task": "second task Updated",
-      "taskId": 2,
+      "task": "second Task",
       "id": 2
     },
     {
-      "task": "third task updated",
-      "taskId": 3,
+      "task": "third task",
       "id": 3
     },
     {
-      "task": "forth task",
-      "taskId": null,
+      "task": "forth task updated using axios",
       "id": 4
-    },
-    {
-      "task": "fifth data",
-      "id": 5
     }
   ]
 }
